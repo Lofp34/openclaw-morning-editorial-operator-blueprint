@@ -1,6 +1,11 @@
-# Morning Editorial Operator Blueprint
+# Editorial Operator — Blueprint
 
-Static GitHub Pages rendering of `morning-editorial-operator-v0.1.md`.
+Plan d'action révisé **v0.2** pour la construction de l'agent `editorial-operator`.
 
-- `index.html`: readable HTML version with navigation and raw source.
-- `morning-editorial-operator-v0.1.md`: original Markdown blueprint.
+🔗 Page : https://lofp34.github.io/openclaw-morning-editorial-operator-blueprint/
+
+## Contenu
+
+- `index.html` — représentation HTML exhaustive du plan v0.2
+- `editorial-operator-plan-v0.2.md` — source Markdown du plan
+- `.nojekyll` — désactive Jekyll pour GitHub Pages

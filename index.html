@@ -1,1325 +1,470 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Morning Editorial Operator - Blueprint v0.1</title>
-  <meta name="description" content="Representation HTML exhaustive du blueprint Morning Editorial Operator v0.1.">
-  <style>
-    :root { color-scheme: light; --bg:#f5f7fb; --panel:#fff; --ink:#172033; --muted:#667085; --line:#d9e0ea; --accent:#0f766e; --code-bg:#111827; --code-ink:#e5e7eb; --soft:#eaf7f4; --warn:#fff7ed; --shadow:0 18px 50px rgba(15,23,42,.08); }
-    * { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.62; }
-    .shell { display:grid; grid-template-columns:320px minmax(0,1fr); min-height:100vh; } aside { position:sticky; top:0; height:100vh; overflow:auto; border-right:1px solid var(--line); background:#fbfcfe; padding:24px 18px; }
-    .brand { display:grid; gap:8px; margin-bottom:22px; } .eyebrow { color:var(--accent); font-size:12px; font-weight:750; letter-spacing:.08em; text-transform:uppercase; } .brand h1 { font-size:22px; line-height:1.15; margin:0; letter-spacing:0; } .brand p { margin:0; color:var(--muted); font-size:14px; }
-    .stats { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:18px 0 22px; } .stat { border:1px solid var(--line); border-radius:8px; background:var(--panel); padding:10px; } .stat span { display:block; color:var(--muted); font-size:12px; } .stat strong { display:block; font-size:18px; margin-top:3px; }
-    nav { display:grid; gap:3px; } nav a { color:#344054; text-decoration:none; padding:8px 10px; border-radius:7px; font-size:14px; } nav a:hover { background:var(--soft); color:#0f766e; } .nav-h1 { font-weight:800; } .nav-h2 { padding-left:16px; }
-    main { padding:34px 42px 80px; max-width:1180px; width:100%; } .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; box-shadow:var(--shadow); padding:32px; margin-bottom:22px; } .hero h2 { margin:0 0 10px; font-size:clamp(30px,4vw,54px); line-height:1.03; letter-spacing:0; } .hero p { margin:0; color:var(--muted); font-size:18px; max-width:850px; }
-    .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; } .btn { display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:8px; padding:10px 13px; color:var(--ink); background:var(--panel); text-decoration:none; font-weight:700; font-size:14px; } .btn.primary { background:var(--accent); color:white; border-color:var(--accent); }
-    .notice { background:var(--warn); border:1px solid #fed7aa; border-radius:8px; padding:14px 16px; margin-bottom:22px; color:#7c2d12; } article { background:var(--panel); border:1px solid var(--line); border-radius:8px; box-shadow:var(--shadow); padding:34px; }
-    article h1,article h2,article h3 { line-height:1.18; letter-spacing:0; scroll-margin-top:24px; } article h1 { font-size:34px; margin:0 0 26px; } article h2 { font-size:27px; margin:44px 0 14px; padding-top:22px; border-top:1px solid var(--line); } article h3 { font-size:20px; margin:28px 0 10px; } article p { margin:12px 0; } article ul,article ol { padding-left:24px; } article li { margin:5px 0; }
-    article code { background:#eef2f7; border:1px solid #dbe3ee; border-radius:6px; padding:2px 5px; font-size:.92em; } article pre { background:var(--code-bg); color:var(--code-ink); overflow:auto; padding:18px; border-radius:8px; border:1px solid #243044; } article pre code { background:transparent; border:0; color:inherit; padding:0; } article table { width:100%; border-collapse:collapse; margin:18px 0; font-size:14px; } article th,article td { border:1px solid var(--line); padding:10px 12px; vertical-align:top; } article th { background:#f2f6fb; text-align:left; }
-    .raw { margin-top:22px; background:var(--panel); border:1px solid var(--line); border-radius:8px; box-shadow:var(--shadow); } .raw summary { cursor:pointer; padding:16px 20px; font-weight:800; } .raw pre { margin:0; max-height:65vh; overflow:auto; background:#101828; color:#f2f4f7; padding:20px; border-radius:0 0 8px 8px; } footer { color:var(--muted); font-size:13px; margin-top:22px; }
-    @media (max-width:920px) { .shell { grid-template-columns:1fr; } aside { position:relative; height:auto; border-right:0; border-bottom:1px solid var(--line); } nav { grid-template-columns:1fr 1fr; } main { padding:22px 14px 52px; } article,.hero { padding:22px; } }
-    @media print { aside,.actions,.raw { display:none; } .shell { display:block; } main { max-width:none; padding:0; } article,.hero { box-shadow:none; border:0; } }
-  </style>
-</head>
-<body><div class="shell"><aside><div class="brand"><div class="eyebrow">Blueprint agent OpenClaw</div><h1>Morning Editorial Operator</h1><p>Representation HTML exhaustive de la specification v0.1.</p></div><div class="stats"><div class="stat"><span>Lignes</span><strong>688</strong></div>
-<div class="stat"><span>Sections</span><strong>12</strong></div>
-<div class="stat"><span>Sous-sections</span><strong>37</strong></div>
-<div class="stat"><span>Code blocks</span><strong>5</strong></div></div><nav aria-label="Sommaire"><a class="nav-h1" href="#morning-editorial-operator-blueprint-v01">Morning Editorial Operator - Blueprint v0.1</a>
-<a class="nav-h2" href="#1-intention">1. Intention</a>
-<a class="nav-h2" href="#2-nom-et-perimetre">2. Nom et perimetre</a>
-<a class="nav-h2" href="#3-architecture-openclaw">3. Architecture OpenClaw</a>
-<a class="nav-h2" href="#4-repo-cible">4. Repo cible</a>
-<a class="nav-h2" href="#5-fichiers-systeme-du-workspace-agent">5. Fichiers systeme du workspace agent</a>
-<a class="nav-h2" href="#6-pipeline-quotidien">6. Pipeline quotidien</a>
-<a class="nav-h2" href="#7-gates-de-production">7. Gates de production</a>
-<a class="nav-h2" href="#8-loop-de-creation-jusquau-bout">8. Loop de creation jusqu&#x27;au bout</a>
-<a class="nav-h2" href="#9-criteres-de-blocage">9. Criteres de blocage</a>
-<a class="nav-h2" href="#10-rapport-quotidien-attendu">10. Rapport quotidien attendu</a>
-<a class="nav-h1" href="#rapport-editorial-quotidien-yyyy-mm-dd">Rapport editorial quotidien - YYYY-MM-DD</a>
-<a class="nav-h2" href="#11-questions-ouvertes-avant-setup-effectif">11. Questions ouvertes avant setup effectif</a>
-<a class="nav-h2" href="#12-prochaine-action-recommandee">12. Prochaine action recommandee</a></nav></aside><main><section class="hero"><div class="eyebrow">Specification de creation</div><h2>Agent editorial quotidien pour le cron de 6h45</h2><p>Une lecture confortable du blueprint complet : architecture, pipeline, gates de production, loop de creation et criteres de blocage.</p><div class="actions"><a class="btn primary" href="#morning-editorial-operator-blueprint-v01">Lire le document</a><a class="btn" href="morning-editorial-operator-v0.1.md">Telecharger le Markdown</a><a class="btn" href="#source-markdown">Voir le source brut</a></div></section><div class="notice">Version publiee pour analyse. Elle conserve le contenu exhaustif du fichier source et ajoute seulement une navigation visuelle.</div><article><h1 id="morning-editorial-operator-blueprint-v01">Morning Editorial Operator - Blueprint v0.1</h1>
-<p>Date: 2026-07-12<br />
-Auteur: ClawdIA<br />
-Statut: specification de creation<br />
-Agent cible: <code>morning-editorial-operator</code></p>
-<h2 id="1-intention">1. Intention</h2>
-<p>Creer un agent OpenClaw dedie a la production editoriale quotidienne de Laurent Serre.</p>
-<p>L&rsquo;agent doit orchestrer le cron du matin a 6h45, de l&rsquo;analyse strategique du sujet jusqu&rsquo;au package de publication, avec une montee progressive vers l&rsquo;auto-publication blog puis LinkedIn.</p>
-<p>Decision d&rsquo;architecture: ne pas fusionner <code>site-maintainer</code> et <code>copywriter-publisher</code>. Creer un operateur dedie, capable de mobiliser des capacites editoriales, SEO, visuelles et publication, mais avec ses propres regles, logs, gates qualite et limites de production.</p>
-<h2 id="2-nom-et-perimetre">2. Nom et perimetre</h2>
-<h3 id="identite-technique">Identite technique</h3>
-<ul>
-<li>Agent id: <code>morning-editorial-operator</code></li>
-<li>Nom lisible: Morning Editorial Operator</li>
-<li>Role: operateur editorial quotidien autonome</li>
-<li>Workspace: <code>~/.openclaw/workspace-morning-editorial-operator</code></li>
-<li>Agent dir: <code>~/.openclaw/agents/morning-editorial-operator/agent</code></li>
-<li>Repo de travail: <code>~/.openclaw/workspace-morning-editorial-operator/projects/morning-editorial-pipeline</code></li>
-<li>Cron cible: tous les jours a 6h45 Europe/Paris</li>
-</ul>
-<h3 id="mission">Mission</h3>
-<p>Chaque matin, l&rsquo;agent doit produire un dossier editorial complet:</p>
-<ul>
-<li>analyse des opportunites de sujet;</li>
-<li>choix argumente du sujet du jour;</li>
-<li>brief editorial;</li>
-<li>article de blog;</li>
-<li>proposition de visuel ou BD/carrousel;</li>
-<li>controles qualite;</li>
-<li>package de publication blog;</li>
-<li>brouillon LinkedIn;</li>
-<li>rapport court a Laurent.</li>
-</ul>
-<h3 id="hors-perimetre-initial">Hors perimetre initial</h3>
-<p>Pendant la phase de construction et de rodage, l&rsquo;agent ne doit pas:</p>
-<ul>
-<li>publier automatiquement sur LinkedIn;</li>
-<li>modifier la configuration globale OpenClaw;</li>
-<li>supprimer ou reinitialiser des donnees;</li>
-<li>publier un article si la checklist blog est incomplete;</li>
-<li>choisir un sujet sans justification tracee;</li>
-<li>ignorer un echec de build, de commit ou de verification live.</li>
-</ul>
-<h2 id="3-architecture-openclaw">3. Architecture OpenClaw</h2>
-<h3 id="isolation">Isolation</h3>
-<p>L&rsquo;agent doit etre isole comme un vrai operateur specialise:</p>
-<ul>
-<li>workspace dedie;</li>
-<li>instructions systeme propres;</li>
-<li>memoire quotidienne propre;</li>
-<li>allowlist explicite de skills;</li>
-<li>repo de pipeline versionnable;</li>
-<li>logs quotidiens;</li>
-<li>artefacts datables.</li>
-</ul>
-<h3 id="configuration-indicative">Configuration indicative</h3>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;morning-editorial-operator&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Morning Editorial Operator&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;workspace&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;~/.openclaw/workspace-morning-editorial-operator&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;agentDir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;~/.openclaw/agents/morning-editorial-operator/agent&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;primary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deepseek/deepseek-v4-flash&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;skills&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="s2">&quot;publication-workflow&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;blog-article-creator&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;article-publication&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;bd-carousel&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;blog-hero-image-creator&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;seo&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;serp-analyzer&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;google-search-console&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;google-analytics&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;linkedin-api&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;gog&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;openclaw-cli&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;self-improving-agent&quot;</span>
-<span class="w">  </span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Morning Editorial Operator&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;emoji&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;📰&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p>Note: la liste exacte des skills doit etre confirmee au moment de la configuration. L&rsquo;objectif est une allowlist explicite, pas un heritage large.</p>
-<h3 id="outils-autorises">Outils autorises</h3>
-<p>Autoriser uniquement ce qui sert au pipeline:</p>
-<ul>
-<li>lecture/ecriture du workspace dedie;</li>
-<li>lecture du repo blog LaurentSerre.com;</li>
-<li>commandes Git necessaires;</li>
-<li>recherche web/SEO si disponible;</li>
-<li>acces GSC/GA4 si deja configure;</li>
-<li>generation image via le specialiste ou skill approprie;</li>
-<li>envoi de rapport a Laurent;</li>
-<li>cron de l&rsquo;agent.</li>
-</ul>
-<h3 id="outils-interdits-ou-encadres">Outils interdits ou encadres</h3>
-<ul>
-<li>Pas de reset destructif.</li>
-<li>Pas de suppression massive.</li>
-<li>Pas de modification globale de config OpenClaw hors phase de setup controlee.</li>
-<li>Pas de publication LinkedIn automatique avant validation explicite.</li>
-<li>Pas de publication blog si une verification bloquante echoue.</li>
-</ul>
-<h2 id="4-repo-cible">4. Repo cible</h2>
-<p>Chemin:</p>
-<div class="codehilite"><pre><span></span><code>~/.openclaw/workspace-morning-editorial-operator/projects/morning-editorial-pipeline/
-</code></pre></div>
-
-<p>Arborescence recommandee:</p>
-<div class="codehilite"><pre><span></span><code>morning-editorial-pipeline/
-  README.md
-  RUNBOOK.md
-  QUALITY.md
-  CONFIG.md
-  CHANGELOG.md
-  prompts/
-    01_research.md
-    02_topic_selection.md
-    03_brief.md
-    04_article.md
-    05_visuals_bd.md
-    06_quality_gate.md
-    07_publish_package.md
-    08_report.md
-  templates/
-    daily-run-report.md
-    topic-scorecard.md
-    article-brief.md
-    qa-report.md
-    linkedin-draft.md
-  runs/
-    .gitkeep
-  scripts/
-    run_daily.sh
-    validate_package.sh
-    collect_context.sh
-  docs/
-    publication-policy.md
-    rollback-policy.md
-    linkedin-policy.md
-    blog-checklist.md
-</code></pre></div>
-
-<h2 id="5-fichiers-systeme-du-workspace-agent">5. Fichiers systeme du workspace agent</h2>
-<h3 id="agentsmd"><code>AGENTS.md</code></h3>
-<p>Contenu attendu:</p>
-<ul>
-<li>mission quotidienne;</li>
-<li>ordre strict des etapes;</li>
-<li>regle de dry-run initial;</li>
-<li>criteres de blocage;</li>
-<li>regles de publication;</li>
-<li>format de rapport;</li>
-<li>obligation de logs;</li>
-<li>obligation de ne pas publier si QA incomplete.</li>
-</ul>
-<h3 id="soulmd"><code>SOUL.md</code></h3>
-<p>Positionnement:</p>
-<ul>
-<li>operateur editorial rigoureux;</li>
-<li>ton sobre, commercial, utile;</li>
-<li>pas de marketing creux;</li>
-<li>pas de contenu generique;</li>
-<li>priorite a l&rsquo;expertise terrain de Laurent;</li>
-<li>chaque article doit etre utile a un dirigeant PME B2B.</li>
-</ul>
-<h3 id="usermd"><code>USER.md</code></h3>
-<p>Elements a inclure:</p>
-<ul>
-<li>Laurent Serre;</li>
-<li>audience: dirigeants de PME B2B, managers commerciaux, responsables sales enablement;</li>
-<li>preference: concret, actionnable, structure;</li>
-<li>rejet: banalites, abstraction, remplissage;</li>
-<li>blog: laurentserre.com;</li>
-<li>email self: <code>ls@laurentserre.com</code>;</li>
-<li>publication LinkedIn: validation humaine au depart.</li>
-</ul>
-<h3 id="toolsmd"><code>TOOLS.md</code></h3>
-<p>Elements a inclure:</p>
-<ul>
-<li>chemin canonique du repo blog;</li>
-<li>commandes de build/test du blog;</li>
-<li>checklist de publication blog;</li>
-<li>chemin des images blog;</li>
-<li>procedure de commit/push;</li>
-<li>procedure de verification live;</li>
-<li>procedure LinkedIn en dry-run;</li>
-<li>contact/rapport a Laurent.</li>
-</ul>
-<h3 id="heartbeatmd"><code>HEARTBEAT.md</code></h3>
-<p>Court, uniquement pour controles:</p>
-<ul>
-<li>verifier le dernier run 6h45;</li>
-<li>signaler si run absent, bloque ou incomplet;</li>
-<li>ne pas ressusciter d&rsquo;anciennes taches.</li>
-</ul>
-<h2 id="6-pipeline-quotidien">6. Pipeline quotidien</h2>
-<p>Chaque run doit creer un dossier:</p>
-<div class="codehilite"><pre><span></span><code>runs/YYYY-MM-DD/
-  00_context.md
-  01_research.md
-  02_topic_scorecard.md
-  03_selected_topic.md
-  04_brief.md
-  05_article.md
-  06_visuals_plan.md
-  07_qa_report.md
-  08_publish_package.md
-  09_linkedin_draft.md
-  10_final_report.md
-</code></pre></div>
-
-<h3 id="etape-0-contexte">Etape 0 - Contexte</h3>
-<p>Collecter:</p>
-<ul>
-<li>date;</li>
-<li>evenements ou contraintes du jour;</li>
-<li>calendrier editorial existant;</li>
-<li>articles recents;</li>
-<li>opportunites SEO;</li>
-<li>signaux GSC/GA4 si disponibles;</li>
-<li>sujets deja traites pour eviter la repetition.</li>
-</ul>
-<p>Sortie: <code>00_context.md</code>.</p>
-<h3 id="etape-1-recherche">Etape 1 - Recherche</h3>
-<p>Identifier 5 a 10 opportunites editoriales.</p>
-<p>Sources possibles:</p>
-<ul>
-<li>Search Console;</li>
-<li>Analytics;</li>
-<li>SERP;</li>
-<li>tendances sectorielles;</li>
-<li>questions clients recurrentes;</li>
-<li>anciens contenus a renforcer;</li>
-<li>opportunites GEO/AEO.</li>
-</ul>
-<p>Sortie: <code>01_research.md</code>.</p>
-<h3 id="etape-2-scoring-sujet">Etape 2 - Scoring sujet</h3>
-<p>Chaque sujet recoit un score:</p>
-<ul>
-<li>potentiel business;</li>
-<li>utilite pour dirigeant PME;</li>
-<li>pertinence SEO;</li>
-<li>originalite;</li>
-<li>evidence terrain disponible;</li>
-<li>facilite de production le jour meme;</li>
-<li>potentiel LinkedIn;</li>
-<li>compatibilite avec les offres Laurent Serre.</li>
-</ul>
-<p>Sortie: <code>02_topic_scorecard.md</code>.</p>
-<h3 id="etape-3-selection">Etape 3 - Selection</h3>
-<p>Choisir un seul sujet principal.</p>
-<p>La selection doit expliquer:</p>
-<ul>
-<li>pourquoi ce sujet maintenant;</li>
-<li>quelle cible precise;</li>
-<li>quel angle;</li>
-<li>quel risque editorial;</li>
-<li>ce qui rend l&rsquo;article non generique.</li>
-</ul>
-<p>Sortie: <code>03_selected_topic.md</code>.</p>
-<h3 id="etape-4-brief">Etape 4 - Brief</h3>
-<p>Produire un brief avant redaction:</p>
-<ul>
-<li>titre provisoire;</li>
-<li>promesse lecteur;</li>
-<li>audience;</li>
-<li>intention de recherche;</li>
-<li>plan H2/H3;</li>
-<li>these centrale;</li>
-<li>exemples terrain;</li>
-<li>CTA;</li>
-<li>liens internes pressentis;</li>
-<li>visuel ou BD associee.</li>
-</ul>
-<p>Sortie: <code>04_brief.md</code>.</p>
-<h3 id="etape-5-article">Etape 5 - Article</h3>
-<p>Rediger l&rsquo;article selon les standards du blog:</p>
-<ul>
-<li>expertise commerciale terrain;</li>
-<li>structure claire;</li>
-<li>exemples concrets;</li>
-<li>densite utile;</li>
-<li>SEO propre;</li>
-<li>CTA coherent;</li>
-<li>pas de contenu creux;</li>
-<li>pas d&rsquo;effet &ldquo;article IA&rdquo;.</li>
-</ul>
-<p>Sortie: <code>05_article.md</code>.</p>
-<h3 id="etape-6-visuels-bd">Etape 6 - Visuels / BD</h3>
-<p>Produire au minimum un plan visuel:</p>
-<ul>
-<li>image hero ou BD/carrousel;</li>
-<li>brief image;</li>
-<li>style compatible Laurent Serre;</li>
-<li>usage blog et LinkedIn;</li>
-<li>alt text;</li>
-<li>nom de fichier propose.</li>
-</ul>
-<p>En phase 1, le visuel peut rester au stade de prompt ou draft. En production, il doit etre genere et integre.</p>
-<p>Sortie: <code>06_visuals_plan.md</code>.</p>
-<h3 id="etape-7-quality-gate">Etape 7 - Quality gate</h3>
-<p>Checklist bloquante:</p>
-<ul>
-<li>sujet justifie;</li>
-<li>brief present;</li>
-<li>article complet;</li>
-<li>titre et meta;</li>
-<li>liens internes;</li>
-<li>CTA;</li>
-<li>image ou plan image;</li>
-<li>absence de repetition evidente avec articles recents;</li>
-<li>conformite ton Laurent;</li>
-<li>build/test si publication;</li>
-<li>index blog mis a jour si article cree;</li>
-<li>dashboard editorial mis a jour si necessaire;</li>
-<li>commit propre si modification repo;</li>
-<li>verification live si deploiement.</li>
-</ul>
-<p>Sortie: <code>07_qa_report.md</code>.</p>
-<h3 id="etape-8-package-publication">Etape 8 - Package publication</h3>
-<p>Preparer:</p>
-<ul>
-<li>chemin cible article;</li>
-<li>slug;</li>
-<li>fichiers a creer/modifier;</li>
-<li>image;</li>
-<li>entry blog index;</li>
-<li>note dashboard editorial;</li>
-<li>commande de test;</li>
-<li>commande de commit;</li>
-<li>statut publication.</li>
-</ul>
-<p>Sortie: <code>08_publish_package.md</code>.</p>
-<h3 id="etape-9-brouillon-linkedin">Etape 9 - Brouillon LinkedIn</h3>
-<p>Produire un post LinkedIn en brouillon:</p>
-<ul>
-<li>accroche terrain;</li>
-<li>idee forte;</li>
-<li>mini-histoire ou tension business;</li>
-<li>lien article;</li>
-<li>appel a discussion;</li>
-<li>pas de publication automatique en phase 1 et 2.</li>
-</ul>
-<p>Sortie: <code>09_linkedin_draft.md</code>.</p>
-<h3 id="etape-10-rapport">Etape 10 - Rapport</h3>
-<p>Rapport court:</p>
-<ul>
-<li>sujet choisi;</li>
-<li>statut;</li>
-<li>fichiers produits;</li>
-<li>blocages;</li>
-<li>decision attendue;</li>
-<li>prochain run.</li>
-</ul>
-<p>Sortie: <code>10_final_report.md</code>.</p>
-<h2 id="7-gates-de-production">7. Gates de production</h2>
-<h3 id="phase-a-construction">Phase A - Construction</h3>
-<p>Objectif: agent configuré et lançable.</p>
-<p>Critere de sortie:</p>
-<ul>
-<li>workspace existe;</li>
-<li>repo existe;</li>
-<li>fichiers systeme crees;</li>
-<li>premier run manuel possible;</li>
-<li>aucun cron actif en publication live.</li>
-</ul>
-<h3 id="phase-b-dry-run-manuel">Phase B - Dry-run manuel</h3>
-<p>Objectif: valider le comportement sans cron.</p>
-<p>Critere de sortie:</p>
-<ul>
-<li>3 runs manuels complets;</li>
-<li>artefacts crees dans <code>runs/YYYY-MM-DD/</code>;</li>
-<li>rapport final exploitable;</li>
-<li>corrections integrees dans instructions.</li>
-</ul>
-<h3 id="phase-c-cron-dry-run">Phase C - Cron dry-run</h3>
-<p>Objectif: verifier la stabilite quotidienne.</p>
-<p>Regle:</p>
-<ul>
-<li>cron 6h45 actif;</li>
-<li>aucune publication blog;</li>
-<li>aucune publication LinkedIn;</li>
-<li>package + rapport seulement.</li>
-</ul>
-<p>Critere de sortie:</p>
-<ul>
-<li>5 runs consecutifs exploitables;</li>
-<li>pas d&rsquo;echec silencieux;</li>
-<li>pas d&rsquo;artefact manquant critique.</li>
-</ul>
-<h3 id="phase-d-blog-semi-auto">Phase D - Blog semi-auto</h3>
-<p>Objectif: autoriser la publication blog sous condition.</p>
-<p>Regle:</p>
-<ul>
-<li>publication blog uniquement si QA OK;</li>
-<li>build OK;</li>
-<li>blog index mis a jour;</li>
-<li>image presente;</li>
-<li>commit propre;</li>
-<li>verification live;</li>
-<li>rapport envoye.</li>
-</ul>
-<p>Critere de sortie:</p>
-<ul>
-<li>3 publications blog propres;</li>
-<li>aucun oubli de l&rsquo;index blog;</li>
-<li>aucun echec de verification live.</li>
-</ul>
-<h3 id="phase-e-linkedin-controle">Phase E - LinkedIn controle</h3>
-<p>Objectif: passer LinkedIn de brouillon a publication encadree.</p>
-<p>Regle:</p>
-<ul>
-<li>7 brouillons valides en historique;</li>
-<li>format stable;</li>
-<li>publication automatique seulement apres feu vert explicite;</li>
-<li>possibilite de rester en mode validation humaine.</li>
-</ul>
-<h2 id="8-loop-de-creation-jusquau-bout">8. Loop de creation jusqu&rsquo;au bout</h2>
-<p>Cette boucle est la procedure operative pour creer l&rsquo;agent.</p>
-<h3 id="cycle-1-specification">Cycle 1 - Specification</h3>
-<p>Responsable: ClawdIA</p>
-<p>Actions:</p>
-<ul>
-<li>produire ce blueprint;</li>
-<li>identifier fichiers a generer;</li>
-<li>definir gates;</li>
-<li>lister questions ouvertes.</li>
-</ul>
-<p>Sortie attendue:</p>
-<ul>
-<li><code>morning-editorial-operator-v0.1.md</code>.</li>
-</ul>
-<h3 id="cycle-2-scaffold">Cycle 2 - Scaffold</h3>
-<p>Responsable: ClawdIA ou agent dev</p>
-<p>Actions:</p>
-<ul>
-<li>creer workspace;</li>
-<li>creer agentDir;</li>
-<li>creer repo pipeline;</li>
-<li>initialiser fichiers systeme;</li>
-<li>initialiser arborescence repo;</li>
-<li>preparer config OpenClaw sans publication live.</li>
-</ul>
-<p>Sortie attendue:</p>
-<ul>
-<li>agent cree mais non autonomise;</li>
-<li>repo initial commit possible.</li>
-</ul>
-<h3 id="cycle-3-configuration-openclaw">Cycle 3 - Configuration OpenClaw</h3>
-<p>Responsable: ClawdIA</p>
-<p>Actions:</p>
-<ul>
-<li>ajouter agent a <code>openclaw.json</code>;</li>
-<li>definir allowlist de skills;</li>
-<li>definir model;</li>
-<li>definir permissions;</li>
-<li>verifier que l&rsquo;agent apparait dans <code>openclaw sessions list</code> ou equivalent;</li>
-<li>relancer gateway si necessaire.</li>
-</ul>
-<p>Sortie attendue:</p>
-<ul>
-<li>agent appelable manuellement.</li>
-</ul>
-<h3 id="cycle-4-run-manuel-1">Cycle 4 - Run manuel 1</h3>
-<p>Responsable: morning-editorial-operator</p>
-<p>Actions:</p>
-<ul>
-<li>produire un run complet sans publication;</li>
-<li>creer dossier <code>runs/YYYY-MM-DD-manual-1/</code>;</li>
-<li>produire rapport.</li>
-</ul>
-<p>Sortie attendue:</p>
-<ul>
-<li>package complet ou blocage explique.</li>
-</ul>
-<h3 id="cycle-5-audit">Cycle 5 - Audit</h3>
-<p>Responsable: ClawdIA</p>
-<p>Actions:</p>
-<ul>
-<li>auditer artefacts;</li>
-<li>noter manques;</li>
-<li>corriger instructions;</li>
-<li>renforcer checklist.</li>
-</ul>
-<p>Sortie attendue:</p>
-<ul>
-<li>version instructions v0.2.</li>
-</ul>
-<h3 id="cycle-6-runs-manuels-2-et-3">Cycle 6 - Runs manuels 2 et 3</h3>
-<p>Responsable: morning-editorial-operator</p>
-<p>Actions:</p>
-<ul>
-<li>refaire deux runs manuels;</li>
-<li>verifier amelioration;</li>
-<li>confirmer stabilite.</li>
-</ul>
-<p>Sortie attendue:</p>
-<ul>
-<li>3 runs manuels propres.</li>
-</ul>
-<h3 id="cycle-7-cron-dry-run">Cycle 7 - Cron dry-run</h3>
-<p>Responsable: ClawdIA</p>
-<p>Actions:</p>
-<ul>
-<li>creer cron 6h45;</li>
-<li>mode dry-run strict;</li>
-<li>rapport quotidien;</li>
-<li>surveillance 5 jours.</li>
-</ul>
-<p>Sortie attendue:</p>
-<ul>
-<li>5 runs consecutifs propres.</li>
-</ul>
-<h3 id="cycle-8-blog-semi-auto">Cycle 8 - Blog semi-auto</h3>
-<p>Responsable: morning-editorial-operator</p>
-<p>Actions:</p>
-<ul>
-<li>autoriser publication blog si QA OK;</li>
-<li>interdire LinkedIn live;</li>
-<li>verifier live URL + presence <code>/blog</code>;</li>
-<li>rapporter.</li>
-</ul>
-<p>Sortie attendue:</p>
-<ul>
-<li>3 publications blog propres.</li>
-</ul>
-<h3 id="cycle-9-production-stabilisee">Cycle 9 - Production stabilisee</h3>
-<p>Responsable: ClawdIA + morning-editorial-operator</p>
-<p>Actions:</p>
-<ul>
-<li>documenter les incidents;</li>
-<li>consolider runbook;</li>
-<li>ajuster cron;</li>
-<li>decider du statut LinkedIn;</li>
-<li>archiver v1.0.</li>
-</ul>
-<p>Sortie attendue:</p>
-<ul>
-<li>agent declare production-ready.</li>
-</ul>
-<h2 id="9-criteres-de-blocage">9. Criteres de blocage</h2>
-<p>L&rsquo;agent doit s&rsquo;arreter et rapporter si:</p>
-<ul>
-<li>aucun sujet ne depasse le seuil qualite;</li>
-<li>source SEO indisponible sans alternative fiable;</li>
-<li>article incomplet;</li>
-<li>image manquante en mode publication;</li>
-<li>build blog en echec;</li>
-<li>index blog non modifie;</li>
-<li>verification live impossible;</li>
-<li>ambiguite sur publication LinkedIn;</li>
-<li>conflit Git non resolu;</li>
-<li>credentials ou acces manquant;</li>
-<li>instruction contradictoire.</li>
-</ul>
-<h2 id="10-rapport-quotidien-attendu">10. Rapport quotidien attendu</h2>
-<p>Format court:</p>
-<div class="codehilite"><pre><span></span><code><span class="gh"># Rapport editorial quotidien - YYYY-MM-DD</span>
-
-Statut: dry-run / package pret / publie / bloque
-Sujet choisi:
-Pourquoi ce sujet:
-Article:
-Visuel/BD:
-LinkedIn:
-QA:
-Fichiers:
-Blocages:
-Decision attendue:
-</code></pre></div>
-
-<h2 id="11-questions-ouvertes-avant-setup-effectif">11. Questions ouvertes avant setup effectif</h2>
-<p>Ces points ne bloquent pas la specification, mais doivent etre tranches pendant le scaffold:</p>
-<ol>
-<li>Le repo pipeline doit-il etre un repo GitHub distinct ou seulement un repo local versionne?</li>
-<li>L&rsquo;agent doit-il avoir son propre canal Telegram ou uniquement fonctionner via cron + rapports a Laurent?</li>
-<li>Quels seuils chiffrés retenir pour le scoring sujet?</li>
-<li>LinkedIn doit-il rester en brouillon permanent ou viser publication automatique apres stabilisation?</li>
-<li>Le visuel quotidien doit-il etre obligatoire tous les jours ou seulement pour certains formats?</li>
-</ol>
-<h2 id="12-prochaine-action-recommandee">12. Prochaine action recommandee</h2>
-<p>Passer au Cycle 2: scaffold de l&rsquo;agent et du repo.</p>
-<p>Ordre d&rsquo;execution:</p>
-<ol>
-<li>creer <code>~/.openclaw/workspace-morning-editorial-operator</code>;</li>
-<li>creer <code>~/.openclaw/agents/morning-editorial-operator/agent</code>;</li>
-<li>creer <code>projects/morning-editorial-pipeline</code>;</li>
-<li>generer <code>AGENTS.md</code>, <code>SOUL.md</code>, <code>USER.md</code>, <code>TOOLS.md</code>, <code>HEARTBEAT.md</code>;</li>
-<li>generer <code>README.md</code>, <code>RUNBOOK.md</code>, <code>QUALITY.md</code>, templates et prompts;</li>
-<li>proposer le bloc config OpenClaw;</li>
-<li>ne pas activer de cron live avant un premier run manuel.</li>
-</ol></article><details class="raw" id="source-markdown"><summary>Source Markdown brut</summary><pre><code># Morning Editorial Operator - Blueprint v0.1
-
-Date: 2026-07-12  
-Auteur: ClawdIA  
-Statut: specification de creation  
-Agent cible: `morning-editorial-operator`
-
-## 1. Intention
-
-Creer un agent OpenClaw dedie a la production editoriale quotidienne de Laurent Serre.
-
-L&#x27;agent doit orchestrer le cron du matin a 6h45, de l&#x27;analyse strategique du sujet jusqu&#x27;au package de publication, avec une montee progressive vers l&#x27;auto-publication blog puis LinkedIn.
-
-Decision d&#x27;architecture: ne pas fusionner `site-maintainer` et `copywriter-publisher`. Creer un operateur dedie, capable de mobiliser des capacites editoriales, SEO, visuelles et publication, mais avec ses propres regles, logs, gates qualite et limites de production.
-
-## 2. Nom et perimetre
-
-### Identite technique
-
-- Agent id: `morning-editorial-operator`
-- Nom lisible: Morning Editorial Operator
-- Role: operateur editorial quotidien autonome
-- Workspace: `~/.openclaw/workspace-morning-editorial-operator`
-- Agent dir: `~/.openclaw/agents/morning-editorial-operator/agent`
-- Repo de travail: `~/.openclaw/workspace-morning-editorial-operator/projects/morning-editorial-pipeline`
-- Cron cible: tous les jours a 6h45 Europe/Paris
-
-### Mission
-
-Chaque matin, l&#x27;agent doit produire un dossier editorial complet:
-
-- analyse des opportunites de sujet;
-- choix argumente du sujet du jour;
-- brief editorial;
-- article de blog;
-- proposition de visuel ou BD/carrousel;
-- controles qualite;
-- package de publication blog;
-- brouillon LinkedIn;
-- rapport court a Laurent.
-
-### Hors perimetre initial
-
-Pendant la phase de construction et de rodage, l&#x27;agent ne doit pas:
-
-- publier automatiquement sur LinkedIn;
-- modifier la configuration globale OpenClaw;
-- supprimer ou reinitialiser des donnees;
-- publier un article si la checklist blog est incomplete;
-- choisir un sujet sans justification tracee;
-- ignorer un echec de build, de commit ou de verification live.
-
-## 3. Architecture OpenClaw
-
-### Isolation
-
-L&#x27;agent doit etre isole comme un vrai operateur specialise:
-
-- workspace dedie;
-- instructions systeme propres;
-- memoire quotidienne propre;
-- allowlist explicite de skills;
-- repo de pipeline versionnable;
-- logs quotidiens;
-- artefacts datables.
-
-### Configuration indicative
-
-```json
-{
-  &quot;id&quot;: &quot;morning-editorial-operator&quot;,
-  &quot;name&quot;: &quot;Morning Editorial Operator&quot;,
-  &quot;workspace&quot;: &quot;~/.openclaw/workspace-morning-editorial-operator&quot;,
-  &quot;agentDir&quot;: &quot;~/.openclaw/agents/morning-editorial-operator/agent&quot;,
-  &quot;model&quot;: {
-    &quot;primary&quot;: &quot;deepseek/deepseek-v4-flash&quot;
-  },
-  &quot;skills&quot;: [
-    &quot;publication-workflow&quot;,
-    &quot;blog-article-creator&quot;,
-    &quot;article-publication&quot;,
-    &quot;bd-carousel&quot;,
-    &quot;blog-hero-image-creator&quot;,
-    &quot;seo&quot;,
-    &quot;serp-analyzer&quot;,
-    &quot;google-search-console&quot;,
-    &quot;google-analytics&quot;,
-    &quot;linkedin-api&quot;,
-    &quot;gog&quot;,
-    &quot;openclaw-cli&quot;,
-    &quot;self-improving-agent&quot;
-  ],
-  &quot;identity&quot;: {
-    &quot;name&quot;: &quot;Morning Editorial Operator&quot;,
-    &quot;emoji&quot;: &quot;📰&quot;
-  }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editorial Operator — Plan v0.2</title>
+<meta name="description" content="Plan d'action révisé v0.2 pour la construction de l'agent Editorial Operator.">
+<style>
+:root {
+  --bg: #0f1117;
+  --surface: #181b24;
+  --surface2: #1e2230;
+  --border: #2a2f3f;
+  --text: #e4e7ef;
+  --text-dim: #9499ad;
+  --accent: #6c8aff;
+  --accent2: #a06cff;
+  --green: #4ade80;
+  --orange: #fbbf24;
+  --red: #f87171;
+  --radius: 12px;
 }
-```
-
-Note: la liste exacte des skills doit etre confirmee au moment de la configuration. L&#x27;objectif est une allowlist explicite, pas un heritage large.
-
-### Outils autorises
-
-Autoriser uniquement ce qui sert au pipeline:
-
-- lecture/ecriture du workspace dedie;
-- lecture du repo blog LaurentSerre.com;
-- commandes Git necessaires;
-- recherche web/SEO si disponible;
-- acces GSC/GA4 si deja configure;
-- generation image via le specialiste ou skill approprie;
-- envoi de rapport a Laurent;
-- cron de l&#x27;agent.
-
-### Outils interdits ou encadres
-
-- Pas de reset destructif.
-- Pas de suppression massive.
-- Pas de modification globale de config OpenClaw hors phase de setup controlee.
-- Pas de publication LinkedIn automatique avant validation explicite.
-- Pas de publication blog si une verification bloquante echoue.
-
-## 4. Repo cible
-
-Chemin:
-
-```text
-~/.openclaw/workspace-morning-editorial-operator/projects/morning-editorial-pipeline/
-```
-
-Arborescence recommandee:
-
-```text
-morning-editorial-pipeline/
-  README.md
-  RUNBOOK.md
-  QUALITY.md
-  CONFIG.md
-  CHANGELOG.md
-  prompts/
-    01_research.md
-    02_topic_selection.md
-    03_brief.md
-    04_article.md
-    05_visuals_bd.md
-    06_quality_gate.md
-    07_publish_package.md
-    08_report.md
-  templates/
-    daily-run-report.md
-    topic-scorecard.md
-    article-brief.md
-    qa-report.md
-    linkedin-draft.md
-  runs/
-    .gitkeep
-  scripts/
-    run_daily.sh
-    validate_package.sh
-    collect_context.sh
-  docs/
-    publication-policy.md
-    rollback-policy.md
-    linkedin-policy.md
-    blog-checklist.md
-```
-
-## 5. Fichiers systeme du workspace agent
-
-### `AGENTS.md`
-
-Contenu attendu:
-
-- mission quotidienne;
-- ordre strict des etapes;
-- regle de dry-run initial;
-- criteres de blocage;
-- regles de publication;
-- format de rapport;
-- obligation de logs;
-- obligation de ne pas publier si QA incomplete.
-
-### `SOUL.md`
-
-Positionnement:
-
-- operateur editorial rigoureux;
-- ton sobre, commercial, utile;
-- pas de marketing creux;
-- pas de contenu generique;
-- priorite a l&#x27;expertise terrain de Laurent;
-- chaque article doit etre utile a un dirigeant PME B2B.
-
-### `USER.md`
-
-Elements a inclure:
-
-- Laurent Serre;
-- audience: dirigeants de PME B2B, managers commerciaux, responsables sales enablement;
-- preference: concret, actionnable, structure;
-- rejet: banalites, abstraction, remplissage;
-- blog: laurentserre.com;
-- email self: `ls@laurentserre.com`;
-- publication LinkedIn: validation humaine au depart.
-
-### `TOOLS.md`
-
-Elements a inclure:
-
-- chemin canonique du repo blog;
-- commandes de build/test du blog;
-- checklist de publication blog;
-- chemin des images blog;
-- procedure de commit/push;
-- procedure de verification live;
-- procedure LinkedIn en dry-run;
-- contact/rapport a Laurent.
-
-### `HEARTBEAT.md`
-
-Court, uniquement pour controles:
-
-- verifier le dernier run 6h45;
-- signaler si run absent, bloque ou incomplet;
-- ne pas ressusciter d&#x27;anciennes taches.
-
-## 6. Pipeline quotidien
-
-Chaque run doit creer un dossier:
-
-```text
-runs/YYYY-MM-DD/
-  00_context.md
-  01_research.md
-  02_topic_scorecard.md
-  03_selected_topic.md
-  04_brief.md
-  05_article.md
-  06_visuals_plan.md
-  07_qa_report.md
-  08_publish_package.md
-  09_linkedin_draft.md
-  10_final_report.md
-```
-
-### Etape 0 - Contexte
-
-Collecter:
-
-- date;
-- evenements ou contraintes du jour;
-- calendrier editorial existant;
-- articles recents;
-- opportunites SEO;
-- signaux GSC/GA4 si disponibles;
-- sujets deja traites pour eviter la repetition.
-
-Sortie: `00_context.md`.
-
-### Etape 1 - Recherche
-
-Identifier 5 a 10 opportunites editoriales.
-
-Sources possibles:
-
-- Search Console;
-- Analytics;
-- SERP;
-- tendances sectorielles;
-- questions clients recurrentes;
-- anciens contenus a renforcer;
-- opportunites GEO/AEO.
-
-Sortie: `01_research.md`.
-
-### Etape 2 - Scoring sujet
-
-Chaque sujet recoit un score:
-
-- potentiel business;
-- utilite pour dirigeant PME;
-- pertinence SEO;
-- originalite;
-- evidence terrain disponible;
-- facilite de production le jour meme;
-- potentiel LinkedIn;
-- compatibilite avec les offres Laurent Serre.
-
-Sortie: `02_topic_scorecard.md`.
-
-### Etape 3 - Selection
-
-Choisir un seul sujet principal.
-
-La selection doit expliquer:
-
-- pourquoi ce sujet maintenant;
-- quelle cible precise;
-- quel angle;
-- quel risque editorial;
-- ce qui rend l&#x27;article non generique.
-
-Sortie: `03_selected_topic.md`.
-
-### Etape 4 - Brief
-
-Produire un brief avant redaction:
-
-- titre provisoire;
-- promesse lecteur;
-- audience;
-- intention de recherche;
-- plan H2/H3;
-- these centrale;
-- exemples terrain;
-- CTA;
-- liens internes pressentis;
-- visuel ou BD associee.
-
-Sortie: `04_brief.md`.
-
-### Etape 5 - Article
-
-Rediger l&#x27;article selon les standards du blog:
-
-- expertise commerciale terrain;
-- structure claire;
-- exemples concrets;
-- densite utile;
-- SEO propre;
-- CTA coherent;
-- pas de contenu creux;
-- pas d&#x27;effet &quot;article IA&quot;.
-
-Sortie: `05_article.md`.
-
-### Etape 6 - Visuels / BD
-
-Produire au minimum un plan visuel:
-
-- image hero ou BD/carrousel;
-- brief image;
-- style compatible Laurent Serre;
-- usage blog et LinkedIn;
-- alt text;
-- nom de fichier propose.
-
-En phase 1, le visuel peut rester au stade de prompt ou draft. En production, il doit etre genere et integre.
-
-Sortie: `06_visuals_plan.md`.
-
-### Etape 7 - Quality gate
-
-Checklist bloquante:
-
-- sujet justifie;
-- brief present;
-- article complet;
-- titre et meta;
-- liens internes;
-- CTA;
-- image ou plan image;
-- absence de repetition evidente avec articles recents;
-- conformite ton Laurent;
-- build/test si publication;
-- index blog mis a jour si article cree;
-- dashboard editorial mis a jour si necessaire;
-- commit propre si modification repo;
-- verification live si deploiement.
-
-Sortie: `07_qa_report.md`.
-
-### Etape 8 - Package publication
-
-Preparer:
-
-- chemin cible article;
-- slug;
-- fichiers a creer/modifier;
-- image;
-- entry blog index;
-- note dashboard editorial;
-- commande de test;
-- commande de commit;
-- statut publication.
-
-Sortie: `08_publish_package.md`.
-
-### Etape 9 - Brouillon LinkedIn
-
-Produire un post LinkedIn en brouillon:
-
-- accroche terrain;
-- idee forte;
-- mini-histoire ou tension business;
-- lien article;
-- appel a discussion;
-- pas de publication automatique en phase 1 et 2.
-
-Sortie: `09_linkedin_draft.md`.
-
-### Etape 10 - Rapport
-
-Rapport court:
-
-- sujet choisi;
-- statut;
-- fichiers produits;
-- blocages;
-- decision attendue;
-- prochain run.
-
-Sortie: `10_final_report.md`.
-
-## 7. Gates de production
-
-### Phase A - Construction
-
-Objectif: agent configuré et lançable.
-
-Critere de sortie:
-
-- workspace existe;
-- repo existe;
-- fichiers systeme crees;
-- premier run manuel possible;
-- aucun cron actif en publication live.
-
-### Phase B - Dry-run manuel
-
-Objectif: valider le comportement sans cron.
-
-Critere de sortie:
-
-- 3 runs manuels complets;
-- artefacts crees dans `runs/YYYY-MM-DD/`;
-- rapport final exploitable;
-- corrections integrees dans instructions.
-
-### Phase C - Cron dry-run
-
-Objectif: verifier la stabilite quotidienne.
-
-Regle:
-
-- cron 6h45 actif;
-- aucune publication blog;
-- aucune publication LinkedIn;
-- package + rapport seulement.
-
-Critere de sortie:
-
-- 5 runs consecutifs exploitables;
-- pas d&#x27;echec silencieux;
-- pas d&#x27;artefact manquant critique.
-
-### Phase D - Blog semi-auto
-
-Objectif: autoriser la publication blog sous condition.
-
-Regle:
-
-- publication blog uniquement si QA OK;
-- build OK;
-- blog index mis a jour;
-- image presente;
-- commit propre;
-- verification live;
-- rapport envoye.
-
-Critere de sortie:
-
-- 3 publications blog propres;
-- aucun oubli de l&#x27;index blog;
-- aucun echec de verification live.
-
-### Phase E - LinkedIn controle
-
-Objectif: passer LinkedIn de brouillon a publication encadree.
-
-Regle:
-
-- 7 brouillons valides en historique;
-- format stable;
-- publication automatique seulement apres feu vert explicite;
-- possibilite de rester en mode validation humaine.
-
-## 8. Loop de creation jusqu&#x27;au bout
-
-Cette boucle est la procedure operative pour creer l&#x27;agent.
-
-### Cycle 1 - Specification
-
-Responsable: ClawdIA
-
-Actions:
-
-- produire ce blueprint;
-- identifier fichiers a generer;
-- definir gates;
-- lister questions ouvertes.
-
-Sortie attendue:
-
-- `morning-editorial-operator-v0.1.md`.
-
-### Cycle 2 - Scaffold
-
-Responsable: ClawdIA ou agent dev
-
-Actions:
-
-- creer workspace;
-- creer agentDir;
-- creer repo pipeline;
-- initialiser fichiers systeme;
-- initialiser arborescence repo;
-- preparer config OpenClaw sans publication live.
-
-Sortie attendue:
-
-- agent cree mais non autonomise;
-- repo initial commit possible.
-
-### Cycle 3 - Configuration OpenClaw
-
-Responsable: ClawdIA
-
-Actions:
-
-- ajouter agent a `openclaw.json`;
-- definir allowlist de skills;
-- definir model;
-- definir permissions;
-- verifier que l&#x27;agent apparait dans `openclaw sessions list` ou equivalent;
-- relancer gateway si necessaire.
-
-Sortie attendue:
-
-- agent appelable manuellement.
-
-### Cycle 4 - Run manuel 1
-
-Responsable: morning-editorial-operator
-
-Actions:
-
-- produire un run complet sans publication;
-- creer dossier `runs/YYYY-MM-DD-manual-1/`;
-- produire rapport.
-
-Sortie attendue:
-
-- package complet ou blocage explique.
-
-### Cycle 5 - Audit
-
-Responsable: ClawdIA
-
-Actions:
-
-- auditer artefacts;
-- noter manques;
-- corriger instructions;
-- renforcer checklist.
-
-Sortie attendue:
-
-- version instructions v0.2.
-
-### Cycle 6 - Runs manuels 2 et 3
-
-Responsable: morning-editorial-operator
-
-Actions:
-
-- refaire deux runs manuels;
-- verifier amelioration;
-- confirmer stabilite.
-
-Sortie attendue:
-
-- 3 runs manuels propres.
-
-### Cycle 7 - Cron dry-run
-
-Responsable: ClawdIA
-
-Actions:
-
-- creer cron 6h45;
-- mode dry-run strict;
-- rapport quotidien;
-- surveillance 5 jours.
-
-Sortie attendue:
-
-- 5 runs consecutifs propres.
-
-### Cycle 8 - Blog semi-auto
-
-Responsable: morning-editorial-operator
-
-Actions:
-
-- autoriser publication blog si QA OK;
-- interdire LinkedIn live;
-- verifier live URL + presence `/blog`;
-- rapporter.
-
-Sortie attendue:
-
-- 3 publications blog propres.
-
-### Cycle 9 - Production stabilisee
-
-Responsable: ClawdIA + morning-editorial-operator
-
-Actions:
-
-- documenter les incidents;
-- consolider runbook;
-- ajuster cron;
-- decider du statut LinkedIn;
-- archiver v1.0.
-
-Sortie attendue:
-
-- agent declare production-ready.
-
-## 9. Criteres de blocage
-
-L&#x27;agent doit s&#x27;arreter et rapporter si:
-
-- aucun sujet ne depasse le seuil qualite;
-- source SEO indisponible sans alternative fiable;
-- article incomplet;
-- image manquante en mode publication;
-- build blog en echec;
-- index blog non modifie;
-- verification live impossible;
-- ambiguite sur publication LinkedIn;
-- conflit Git non resolu;
-- credentials ou acces manquant;
-- instruction contradictoire.
-
-## 10. Rapport quotidien attendu
-
-Format court:
-
-```markdown
-# Rapport editorial quotidien - YYYY-MM-DD
-
-Statut: dry-run / package pret / publie / bloque
-Sujet choisi:
-Pourquoi ce sujet:
-Article:
-Visuel/BD:
-LinkedIn:
-QA:
-Fichiers:
-Blocages:
-Decision attendue:
-```
-
-## 11. Questions ouvertes avant setup effectif
-
-Ces points ne bloquent pas la specification, mais doivent etre tranches pendant le scaffold:
-
-1. Le repo pipeline doit-il etre un repo GitHub distinct ou seulement un repo local versionne?
-2. L&#x27;agent doit-il avoir son propre canal Telegram ou uniquement fonctionner via cron + rapports a Laurent?
-3. Quels seuils chiffrés retenir pour le scoring sujet?
-4. LinkedIn doit-il rester en brouillon permanent ou viser publication automatique apres stabilisation?
-5. Le visuel quotidien doit-il etre obligatoire tous les jours ou seulement pour certains formats?
-
-## 12. Prochaine action recommandee
-
-Passer au Cycle 2: scaffold de l&#x27;agent et du repo.
-
-Ordre d&#x27;execution:
-
-1. creer `~/.openclaw/workspace-morning-editorial-operator`;
-2. creer `~/.openclaw/agents/morning-editorial-operator/agent`;
-3. creer `projects/morning-editorial-pipeline`;
-4. generer `AGENTS.md`, `SOUL.md`, `USER.md`, `TOOLS.md`, `HEARTBEAT.md`;
-5. generer `README.md`, `RUNBOOK.md`, `QUALITY.md`, templates et prompts;
-6. proposer le bloc config OpenClaw;
-7. ne pas activer de cron live avant un premier run manuel.
-</code></pre></details><footer>Genere depuis <code>morning-editorial-operator-v0.1.md</code>.</footer></main></div></body></html>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.layout { display: flex; max-width: 1400px; margin: 0 auto; }
+
+/* Sidebar */
+.sidebar {
+  width: 300px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+.sidebar-header {
+  padding: 28px 24px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-header h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.sidebar-header .version {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+.toc { padding: 16px 0; }
+.toc h2 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  padding: 0 24px 8px;
+}
+.toc ul { list-style: none; }
+.toc-l2 a {
+  display: block;
+  padding: 6px 24px;
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  transition: background .15s, color .15s;
+  border-left: 2px solid transparent;
+}
+.toc-l2 a:hover { background: var(--surface2); border-left-color: var(--accent); }
+.toc-l3 a {
+  display: block;
+  padding: 4px 24px 4px 40px;
+  font-size: 12px;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color .15s;
+}
+.toc-l3 a:hover { color: var(--text); }
+.toc-num { color: var(--accent); font-weight: 600; margin-right: 4px; }
+
+/* Main */
+.main {
+  flex: 1;
+  padding: 48px 56px 120px;
+  max-width: 900px;
+  min-width: 0;
+}
+.hero {
+  margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.hero h1 {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+.hero .subtitle {
+  font-size: 16px;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+}
+.hero-meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.hero-meta span {
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--surface);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+.stat .num {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+}
+.stat .label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 48px;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.sec-num { color: var(--accent); }
+h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 28px;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+p { margin-bottom: 12px; font-size: 15px; }
+ul { margin: 8px 0 16px 20px; }
+li { margin-bottom: 6px; font-size: 15px; }
+code {
+  background: var(--surface2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: "SF Mono", "Fira Code", monospace;
+}
+pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  overflow-x: auto;
+  margin: 16px 0;
+}
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+strong { font-weight: 600; }
+
+/* Phase highlight */
+.main :has(> .phase-badge) { list-style: none; }
+.phase-badge {
+  display: inline-block;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 28px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+/* Mobile */
+@media (max-width: 920px) {
+  .layout { flex-direction: column; }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .main { padding: 32px 20px 80px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .hero h1 { font-size: 26px; }
+}
+
+/* Print */
+@media print {
+  body { background: #fff; color: #000; }
+  .sidebar { display: none; }
+  .main { padding: 0; }
+  .stat, .hero-meta span { border: 1px solid #ccc; background: #f9f9f9; }
+  h2 { page-break-after: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1>Editorial Operator</h1>
+      <div class="version">Plan v0.2 — 14 juillet 2026</div>
+    </div>
+    <nav class="toc"><h2>Sommaire</h2><ul><li class="toc-l2"><a href="#1-decisions-validees-par-laurent"><span class="toc-num">1.</span> 1. Décisions validées par Laurent</a></li><li class="toc-l2"><a href="#2-resultat-de-laudit-du-blueprint-v01"><span class="toc-num">2.</span> 2. Résultat de l&#x27;audit du blueprint v0.1</a></li><li class="toc-l3"><a href="#provenance-prevue-des-huit-prompts">1.2 Provenance prévue des huit prompts</a></li><li class="toc-l2"><a href="#3-architecture-cible"><span class="toc-num">3.</span> 3. Architecture cible</a></li><li class="toc-l3"><a href="#agent-openclaw">1.3 Agent OpenClaw</a></li><li class="toc-l3"><a href="#modeles">2.3 Modèles</a></li><li class="toc-l3"><a href="#fichiers-systeme">3.3 Fichiers système</a></li><li class="toc-l2"><a href="#4-skills-cibles"><span class="toc-num">4.</span> 4. Skills cibles</a></li><li class="toc-l3"><a href="#reutilises-ou-derives">1.4 Réutilisés ou dérivés</a></li><li class="toc-l3"><a href="#adaptations-obligatoires-via-skill-workshop">2.4 Adaptations obligatoires via Skill Workshop</a></li><li class="toc-l2"><a href="#5-contrat-editorial-quotidien"><span class="toc-num">5.</span> 5. Contrat éditorial quotidien</a></li><li class="toc-l3"><a href="#selection-du-sujet-sur-100-points">1.5 Sélection du sujet sur 100 points</a></li><li class="toc-l3"><a href="#entrees-prioritaires">2.5 Entrées prioritaires</a></li><li class="toc-l3"><a href="#visuels-obligatoires">3.5 Visuels obligatoires</a></li><li class="toc-l2"><a href="#6-pipeline-versionne"><span class="toc-num">6.</span> 6. Pipeline versionné</a></li><li class="toc-l2"><a href="#7-maton-et-securite-linkedin"><span class="toc-num">7.</span> 7. MATON et sécurité LinkedIn</a></li><li class="toc-l2"><a href="#8-telegram-dedie"><span class="toc-num">8.</span> 8. Telegram dédié</a></li><li class="toc-l2"><a href="#9-phases-dexecution-one-shot"><span class="toc-num">9.</span> 9. Phases d&#x27;exécution one shot</a></li><li class="toc-l2"><a href="#10-stabilisation-et-activation"><span class="toc-num">10.</span> 10. Stabilisation et activation</a></li><li class="toc-l2"><a href="#11-goal-et-watchdog-temporaire"><span class="toc-num">11.</span> 11. `/goal` et watchdog temporaire</a></li><li class="toc-l2"><a href="#12-criteres-de-fin-de-la-construction"><span class="toc-num">12.</span> 12. Critères de fin de la construction</a></li><li class="toc-l2"><a href="#13-seul-prerequis-restant-avant-lexecution"><span class="toc-num">13.</span> 13. Seul prérequis restant avant l&#x27;exécution</a></li></ul></nav>
+  </aside>
+  <main class="main">
+    <div class="hero">
+      <h1>Plan d'action révisé v0.2</h1>
+      <p class="subtitle">Construction de l'agent <code>editorial-operator</code> — séquence contrôlée, sans publication live pendant la construction.</p>
+      <div class="hero-meta">
+        <span>📅 14 juillet 2026</span>
+        <span>⚙️ GLM 5.2</span>
+        <span>🔒 Dry-run</span>
+        <span>🤖 ClawdIA</span>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">13</div><div class="label">Sections</div></div>
+      <div class="stat"><div class="num">9</div><div class="label">Sous-sections</div></div>
+      <div class="stat"><div class="num">1676</div><div class="label">Mots</div></div>
+      <div class="stat"><div class="num">11</div><div class="label">Phases</div></div>
+    </div>
+    <h1 id="editorial-operator-plan-daction-revise-v02">Editorial Operator - Plan d&#x27;action révisé v0.2</h1>
+<p>Date: 2026-07-14</p>
+<p>Statut: à valider avant exécution</p>
+<p>Objet: construire l&#x27;agent <code>editorial-operator</code> en une séquence contrôlée, sans publication live pendant la construction.</p>
+<h2 id="1-decisions-validees-par-laurent"><span class="sec-num">1.</span> 1. Décisions validées par Laurent</h2>
+<ul>
+<li>Identité technique: <code>editorial-operator</code>.</li>
+<li>Nom lisible: <code>Editorial Operator</code>.</li>
+<li>Supprimer toutes les références au précédent nom, y compris noms de repo, fichiers, chemins, modes et textes.</li>
+<li>Modèle principal: <code>zai/glm-5.2</code>.</li>
+<li>ClawdIA pilote le cycle 2 et la création, pas Dave.</li>
+<li>Pipeline editorial dans un dépôt Git local versionné au départ.</li>
+<li>Canal Telegram dédié, limité à Laurent, token fourni ultérieurement.</li>
+<li>MATON est la couche de publication LinkedIn.</li>
+<li>Le visuel est obligatoire chaque jour: image hero du blog et carrousel BD complet.</li>
+<li>LinkedIn reste en dry-run pendant la stabilisation, puis passe en automatique après validation des seuils.</li>
+</ul>
+<h2 id="2-resultat-de-laudit-du-blueprint-v01"><span class="sec-num">2.</span> 2. Résultat de l&#x27;audit du blueprint v0.1</h2>
+<p>Le dépôt GitHub de référence contient exactement quatre fichiers:</p>
+<ul>
+<li><code>.nojekyll</code></li>
+<li><code>README.md</code></li>
+<li><code>index.html</code></li>
+<li>le fichier Markdown du blueprint initial</li>
+</ul>
+<p>L&#x27;arborescence annoncée dans le blueprint n&#x27;existe pas. Les huit prompts, cinq templates, scripts, documents, fichiers système et schémas restent donc à rédiger.</p>
+<p>Les éléments listés dans le blueprint sont une spécification, pas des livrables déjà disponibles.</p>
+<h3 id="provenance-prevue-des-huit-prompts">Provenance prévue des huit prompts</h3>
+<ul>
+<li><code>01_research.md</code>: <code>serp-analyzer</code>, Google Search Console, Google Analytics et recherche web.</li>
+<li><code>02_topic_selection.md</code>: règles de sélection du <code>blog-article-creator</code> et nouvelle grille de score.</li>
+<li><code>03_brief.md</code>: références de brief et de calibration de la voix de Laurent.</li>
+<li><code>04_article.md</code>: <code>blog-article-creator</code>, guide de voix, style français et boucle de révision.</li>
+<li><code>05_visuals_bd.md</code>: <code>blog-hero-image-creator</code>, <code>bd-carousel</code> et <code>gpt-image-2-workshop</code>.</li>
+<li><code>06_quality_gate.md</code>: contrôles finaux éditorial, SEO, factuel, visuel et technique.</li>
+<li><code>07_publish_package.md</code>: protocoles de publication blog, MATON et LinkedIn.</li>
+<li><code>08_report.md</code>: nouveau contrat de rapport, manifestes et reprise sur checkpoint.</li>
+</ul>
+<p>Les cinq templates seront nouveaux. Ils seront reliés à des JSON Schemas afin que les sorties importantes ne reposent pas sur du Markdown libre.</p>
+<h2 id="3-architecture-cible"><span class="sec-num">3.</span> 3. Architecture cible</h2>
+<h3 id="agent-openclaw">Agent OpenClaw</h3>
+<ul>
+<li>Agent ID: <code>editorial-operator</code></li>
+<li>Workspace: <code>~/.openclaw/workspace-editorial-operator</code></li>
+<li>Agent directory: <code>~/.openclaw/agents/editorial-operator/agent</code></li>
+<li>Pipeline local: <code>~/.openclaw/workspace-editorial-operator/projects/editorial-pipeline</code></li>
+<li>Clone site dédié: <code>~/.openclaw/workspace-editorial-operator/projects/site-LSD-repo</code></li>
+</ul>
+<p>Le clone site sera propre et indépendant. Le worktree actuel du copywriter contient des modifications; il ne sera ni réutilisé ni nettoyé par cette mission.</p>
+<h3 id="modeles">Modèles</h3>
+<ul>
+<li>Texte et orchestration: <code>zai/glm-5.2</code>, thinking <code>high</code>.</li>
+<li>Contrôle visuel explicite: <code>zai/glm-5v-turbo</code>.</li>
+<li>Génération hero et BD: appel explicite à <code>openai/gpt-image-2</code>.</li>
+<li>Aucun fallback image silencieux: un échec visuel bloque le package.</li>
+<li>Un fallback texte éventuel peut produire un brouillon dégradé, mais ne peut pas publier automatiquement.</li>
+</ul>
+<h3 id="fichiers-systeme">Fichiers système</h3>
+<p>Les noms canoniques sont <code>AGENTS.md</code>, <code>SOUL.md</code>, <code>USER.md</code>, <code>TOOLS.md</code>, <code>HEARTBEAT.md</code>, plus <code>IDENTITY.md</code>, <code>MEMORY.md</code> et <code>memory/</code>. Il n&#x27;existe pas de fichier canonique <code>SUB.md</code>.</p>
+<ul>
+<li><code>AGENTS.md</code>: objectif, contexte, contraintes, commandes, contrôles et définition de terminé. Court et opérationnel.</li>
+<li><code>SOUL.md</code>: identité Editorial Operator, ton, responsabilités et limites.</li>
+<li><code>USER.md</code>: profil utile de Laurent et préférences éditoriales.</li>
+<li><code>TOOLS.md</code>: particularités locales, accès, chemins et procédures. Pas de secrets.</li>
+<li><code>HEARTBEAT.md</code>: contrôles légers seulement; aucune orchestration lourde.</li>
+<li><code>IDENTITY.md</code>: nom, rôle et présentation.</li>
+<li><code>MEMORY.md</code>: décisions durables; journal quotidien séparé.</li>
+</ul>
+<p>Cette répartition suit les recommandations OpenAI Codex pour <code>AGENTS.md</code> et les spécifications OpenClaw des workspaces d&#x27;agents.</p>
+<h2 id="4-skills-cibles"><span class="sec-num">4.</span> 4. Skills cibles</h2>
+<h3 id="reutilises-ou-derives">Réutilisés ou dérivés</h3>
+<ul>
+<li><code>blog-article-creator</code></li>
+<li><code>serp-analyzer</code></li>
+<li><code>seo</code></li>
+<li><code>google-search-console</code></li>
+<li><code>google-analytics</code></li>
+<li><code>generative-engine-optimization</code> si son apport est confirmé par test</li>
+<li><code>blog-hero-image-creator</code></li>
+<li><code>bd-carousel</code></li>
+<li><code>self-improvement</code></li>
+</ul>
+<p>Les deux chemins copywriter fournis par Laurent résolvent vers le même dossier physique. Il n&#x27;y a donc qu&#x27;une source à auditer.</p>
+<h3 id="adaptations-obligatoires-via-skill-workshop">Adaptations obligatoires via Skill Workshop</h3>
+<ul>
+<li>Dériver un skill cible sans vocabulaire lié à l'ancien nom.</li>
+<li>Renommer le mode historique en <code>operator-autopilot</code>.</li>
+<li>Réconcilier les contradictions de formats, nombres de slides et tailles d'image.</li>
+<li>Utiliser l'asset de référence Laurent contenu dans le skill, sans chemin absolu externe.</li>
+<li>Créer <code>linkedin-publisher-maton</code> comme unique chemin de publication LinkedIn.</li>
+</ul>
+<p>Le skill générique <code>publication-workflow</code> sert de source documentaire, mais ne sera pas activé comme orchestrateur concurrent. Les skills génériques LinkedIn/MATON qui se recouvrent ne seront pas tous exposés à l&#x27;agent.</p>
+<h2 id="5-contrat-editorial-quotidien"><span class="sec-num">5.</span> 5. Contrat éditorial quotidien</h2>
+<h3 id="selection-du-sujet-sur-100-points">Sélection du sujet sur 100 points</h3>
+<ul>
+<li>Pertinence business et offres: 20</li>
+<li>Douleur et utilité pour la cible: 15</li>
+<li>Expertise et preuves disponibles: 15</li>
+<li>Opportunité SEO GSC/SERP: 15</li>
+<li>Originalité et absence de doublon: 10</li>
+<li>Actualité et momentum: 10</li>
+<li>Potentiel LinkedIn et visuel: 10</li>
+<li>Faisabilité du jour: 5</li>
+</ul>
+<p>Règles:</p>
+<ul>
+<li>Score inférieur à 60: no-go et rapport.</li>
+<li>Score de 60 à 69: shortlist ou brouillon, pas de package complet.</li>
+<li>Score de 70 à 79: package complet possible si tous les garde-fous passent.</li>
+<li>Score de 80 ou plus: eligible à l'automatisation après stabilisation.</li>
+<li>Les contrôles anti-doublon, pertinence business, qualité des preuves et diversité des sources restent bloquants quel que soit le score.</li>
+</ul>
+<h3 id="entrees-prioritaires">Entrées prioritaires</h3>
+<ul>
+<li>Un seul fichier <code>*.publish-ok.md</code>: il est publié sans nouvelle réécriture éditoriale.</li>
+<li>Plusieurs fichiers <code>*.publish-ok.md</code>: blocage et alerte d'ambiguïté.</li>
+<li>Aucun fichier valide: recherche, score, brief et production autonomes.</li>
+</ul>
+<h3 id="visuels-obligatoires">Visuels obligatoires</h3>
+<ul>
+<li>Une hero blog paysage générée avec <code>openai/gpt-image-2</code>, optimisée WebP, avec texte alternatif.</li>
+<li>Un carrousel BD complet, séquentiel et cohérent, de 8 à 16 slides selon l'histoire.</li>
+<li>Export LinkedIn 1080 x 1350 par slide et PDF final.</li>
+<li>Export WebP pour l'article de blog.</li>
+<li>Contrôle des dimensions, lisibilité, continuité des personnages, contact sheet et inspection visuelle de chaque slide.</li>
+<li>Toute absence ou erreur visuelle bloque la publication.</li>
+</ul>
+<h2 id="6-pipeline-versionne"><span class="sec-num">6.</span> 6. Pipeline versionné</h2>
+<p>Le repo local contiendra au minimum:</p>
+<ul>
+<li><code>README.md</code>, <code>RUNBOOK.md</code>, <code>QUALITY.md</code>, <code>CONFIG.md</code>, <code>CHANGELOG.md</code></li>
+<li><code>prompts/</code> avec les huit prompts rédigés</li>
+<li><code>templates/</code> avec les cinq templates rédigés</li>
+<li><code>schemas/</code> avec les schémas JSON de score, brief, état, QA et manifeste</li>
+<li><code>scripts/preflight</code>, <code>run_daily</code>, <code>resume_run</code>, <code>validate_package</code> et publication dry-run/live</li>
+<li><code>tests/fixtures/</code> pour les trois branches d'entrée</li>
+<li><code>runs/<run-id>/STATE.json</code> et un manifeste immuable par exécution</li>
+<li><code>docs/</code> pour politiques publication, rollback, LinkedIn, blog et incidents</li>
+</ul>
+<p>Chaque étape écrit atomiquement son checkpoint. Une reprise ne refait pas une étape déjà validée.</p>
+<h2 id="7-maton-et-securite-linkedin"><span class="sec-num">7.</span> 7. MATON et sécurité LinkedIn</h2>
+<ul>
+<li>Utiliser <code>gateway.maton.ai</code> et les connexions déjà testées pour LinkedIn, GSC et GA.</li>
+<li>Valider la version API LinkedIn au moment de l'implémentation au lieu de conserver une version figée.</li>
+<li>Ajouter <code>--dry-run</code>, idempotency key, registre des publications et détection des doublons.</li>
+<li>Vérifier visuellement le post après HTTP 201; le succès API ne prouve pas l'intégrité du rendu.</li>
+<li>Normaliser le texte LinkedIn pour éviter les troncatures connues.</li>
+</ul>
+<p>Alerte: un script local de publication différée contient actuellement une clé d&#x27;API en dur. Avant toute réutilisation, la clé devra être révoquée ou tournée, le script assaini et le secret placé dans l&#x27;environnement Gateway. Aucune valeur de secret ne sera copiée dans le nouveau repo.</p>
+<h2 id="8-telegram-dedie"><span class="sec-num">8.</span> 8. Telegram dédié</h2>
+<ul>
+<li>Compte Telegram nommé <code>editorial-operator</code>.</li>
+<li>Token dans un fichier secret régulier, permissions <code>600</code>, jamais dans Git ni dans les prompts.</li>
+<li>Binding exact du compte vers l'agent <code>editorial-operator</code>.</li>
+<li><code>dmPolicy: allowlist</code> avec l'ID Telegram de Laurent uniquement.</li>
+<li>Groupes désactivés par défaut.</li>
+<li><code>defaultAccount</code> Telegram explicite pour ne pas modifier le routage des autres bots.</li>
+<li>Validation par <code>getMe</code>, redémarrage Gateway, test de binding et test de réponse privée.</li>
+</ul>
+<h2 id="9-phases-dexecution-one-shot"><span class="sec-num">9.</span> 9. Phases d&#x27;exécution one shot</h2>
+<p>1. Sauvegarde config, inventaire et rotation de la clé d&#x27;API exposée.</p>
+<p>2. Renommage du blueprint en <code>Editorial Operator</code>, y compris repo, page, fichiers, chemins et modes.</p>
+<p>3. Création du workspace, du repo pipeline Git local et du clone site propre.</p>
+<p>4. Génération et validation des skills cibles via Skill Workshop.</p>
+<p>5. Rédaction des fichiers système, prompts, templates, schémas, scripts et documentation.</p>
+<p>6. Enregistrement de l&#x27;agent GLM 5.2 avec politique d&#x27;outils minimale.</p>
+<p>7. Configuration Telegram après réception du token.</p>
+<p>8. Tests unitaires, fixtures, contrôles de secrets et validation OpenClaw.</p>
+<p>9. Un dry-run réel de bout en bout avec article, hero et carrousel réel, sans publication.</p>
+<p>10. Audit final, corrections, second dry-run et rapport de preuve.</p>
+<p>11. Activation du cron éditorial quotidien en mode dry-run.</p>
+<p>La construction peut être réalisée en one shot. La stabilisation éditoriale et l&#x27;activation des publications live restent volontairement séparées car elles exigent plusieurs exécutions réelles.</p>
+<h2 id="10-stabilisation-et-activation"><span class="sec-num">10.</span> 10. Stabilisation et activation</h2>
+<ul>
+<li>Palier 1: cinq runs planifiés consécutifs sans erreur, publication désactivée.</li>
+<li>Palier 2: trois publications blog propres et vérifiées avant automatisation blog complète.</li>
+<li>Palier 3: sept packages LinkedIn valides, sans doublon ni erreur de rendu, avant activation MATON live.</li>
+<li>Toute publication LinkedIn live reste désactivée jusqu'au GO d'activation après revue des preuves.</li>
+<li>Un échec remet le compteur du palier concerné à zéro et produit un rapport d'incident.</li>
+</ul>
+<h2 id="11-goal-et-watchdog-temporaire"><span class="sec-num">11.</span> 11. `/goal` et watchdog temporaire</h2>
+<p>Le <code>/goal</code> conserve l&#x27;objectif dans la session mais n&#x27;est pas, selon la documentation OpenClaw, une tâche de fond. Il sera donc complété par un cron temporaire ClawdIA toutes les cinq minutes.</p>
+<p>Le watchdog:</p>
+<ul>
+<li>lit <code>STATE.json</code>, l'objectif et l'activité de la session exacte;</li>
+<li>ne fait rien si un run est actif;</li>
+<li>relance depuis le dernier checkpoint si le travail est incomplet et inactif depuis plus de huit minutes;</li>
+<li>utilise lock, run ID et idempotence pour interdire deux reprises concurrentes;</li>
+<li>alerte Laurent sur un vrai blocage au lieu de boucler sans fin;</li>
+<li>se désactive et se supprime dès que le rapport final est validé.</li>
+</ul>
+<p>Limite explicite: un cron OpenClaw ne peut pas agir pendant une panne totale du Gateway. Le planning persiste et reprend après redémarrage, mais il ne remplace pas un superviseur système externe.</p>
+<h2 id="12-criteres-de-fin-de-la-construction"><span class="sec-num">12.</span> 12. Critères de fin de la construction</h2>
+<ul>
+<li>Plus aucune référence à l'ancien nom dans les artefacts cibles.</li>
+<li>Agent, workspace, skills et Telegram valides par OpenClaw.</li>
+<li>Aucun secret dans Git, les logs de preuve ou les fichiers de travail.</li>
+<li>Les trois branches d'entrée sont testées.</li>
+<li>Un run réel produit article, hero, BD, exports blog/LinkedIn, QA et rapport.</li>
+<li>Aucun effet de bord public pendant les tests.</li>
+<li>Repo pipeline propre, commité localement et reproductible.</li>
+<li>Watchdog supprimé après succès.</li>
+</ul>
+<h2 id="13-seul-prerequis-restant-avant-lexecution"><span class="sec-num">13.</span> 13. Seul prérequis restant avant l&#x27;exécution</h2>
+<p>Laurent doit fournir le token du nouveau bot Telegram par le canal secret prévu. Le token ne doit pas être collé dans un fichier versionné.</p>
+  </main>
+</div>
+</body>
+</html>
